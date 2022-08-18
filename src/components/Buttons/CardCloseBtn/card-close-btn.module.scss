@@ -1,0 +1,67 @@
+.closeBtn {
+	width: 24px;
+	height: 24px;
+    position: absolute;
+    top: -9px;
+    right: -9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+	div {
+        height: 70%;
+        width: 70%;
+		background: transparent;
+		border-radius: 50px;
+		box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+		cursor: pointer;
+		line-height: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: all 250ms ease-out;
+		transform: rotateX(90deg);
+
+		div {
+			position: relative;
+			width: 100%;
+			height: 100%;
+
+			span {
+				width: 10px;
+				height: 2px;
+				background-color: white;
+				position: absolute;
+				left: 3px;
+				top: 7px;
+				opacity: 0;
+				border-radius: 5px;
+
+				transform: rotateZ(0deg);
+				transition: all 250ms ease-out;
+			}
+		}
+	}
+
+	&:hover {
+		div {
+			background: red;
+			transform: rotateX(0deg);
+
+			div {
+				span {
+					opacity: 1;
+
+					&:nth-child(1) {
+						transform: rotateZ(45deg);
+					}
+
+					&:nth-child(2) {
+						transform: rotateZ(-45deg);
+					}
+				}
+			}
+		}
+	}
+}

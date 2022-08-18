@@ -17,12 +17,10 @@ const TMP_ELS: CorkboardElementSavedConfiguration[] = [
 	},
 ];
 
-const STARTER_ITEMS = getFromLocalStorage().length === 0 ? TMP_ELS : getFromLocalStorage()
-
 function App() {
   return (
     <div id="main">
-      <Canvas items={STARTER_ITEMS} />
+      <Canvas />
     </div>
   )
 }
