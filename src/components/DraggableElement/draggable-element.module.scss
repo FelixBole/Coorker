@@ -1,0 +1,19 @@
+.element {
+	min-width: 50px;
+	min-height: 50px;
+	width: 200px;
+	height: 60px;
+	background: gray;
+
+	position: absolute;
+
+	cursor: move;
+}
+
+.dragging {
+    background-color: blue;
+
+    &::before {
+        content: "Drop me somewhere"
+    }
+}
