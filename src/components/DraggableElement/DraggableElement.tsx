@@ -7,6 +7,8 @@ import styles from "./draggable-element.module.scss";
 // Create function to shift if draggable or not to be called by children ?
 
 type Props = {
+	id: number;
+	updateFc: (configuration: CorkboardElementSavedConfiguration) => void;
 	config?: CorkboardElementSavedConfiguration;
 	children?: JSX.Element | JSX.Element[];
 };
@@ -17,7 +19,7 @@ const DEFAULT_CONFIG = {
 	position: { x: 10, y: 10 },
 };
 
-const DraggableElement = ({ children, config }: Props) => {
+const DraggableElement = ({ children, id, config, updateFc }: Props) => {
 	const [dragElementOffset, setDragElementOffset] = useState({
 		x: 0,
 		y: 0,
@@ -47,16 +49,29 @@ const DraggableElement = ({ children, config }: Props) => {
 
 	const stopDrag = (e: React.MouseEvent<HTMLElement>) => {
 		setDragging(false);
-		e.currentTarget.style.zIndex = "50";
+
+		const el = e.currentTarget;
+		if (!el) return;
+
+		el.style.zIndex = "50";
+
+		const rect = el.getBoundingClientRect();
+
+		updateFc({
+			id,
+			width: el.offsetWidth,
+			height: el.offsetHeight,
+			position: { x: rect.left, y: rect.top },
+		});
 	};
 
 	const configuration = { ...DEFAULT_CONFIG, ...config };
-
+	const { width, height, position } = configuration;
 	const style = {
-		width: configuration.width + "px",
-		height: configuration.height + "px",
-		top: configuration.position.y + "px",
-		left: configuration.position.x + "px",
+		width: width + "px",
+		height: height + "px",
+		top: position.y + "px",
+		left: position.x + "px",
 	} as React.CSSProperties;
 
 	return (
